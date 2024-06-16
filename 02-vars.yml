@@ -9,3 +9,12 @@
     - name: Task2
       ansible.builtin.debug:
               msg: URL task2 - {{URL}}
+
+- name: Play for variable level files
+  hosts: all
+  vars_files:
+    - sample-vars.yml
+  tasks:
+    - name: task1 from variable level files
+      ansible.builtin.debug:
+              msg: URL - {{URL}}
