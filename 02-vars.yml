@@ -18,3 +18,20 @@
     - name: task1 from variable level files
       ansible.builtin.debug:
               msg: URL - {{URL}}
+
+- name: play for task level variables
+  hosts: all
+  tasks:
+    - name: Task1
+      ansible.builtin.debug:
+        msg: URL - {{URL}}
+      vars:
+        URL: task1.example.com
+        msg: URL - {{URL}}
+    - name: Task2
+      vars:
+        URL: task2.example.com
+      ansible.builtin.debug:
+           msg: URL - {{URL}}
+
+
