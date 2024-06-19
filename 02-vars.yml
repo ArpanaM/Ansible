@@ -46,5 +46,11 @@
     - name: Print URL
       ansible.builtin.debug:
         msg: URL - {{URL}}
+- name: variable from facts
+  hosts: all
+  tasks:
+    - name: print fact
+      ansible.builtin.debug:
+        msg: Hostname - {{ansible_fqdn}}
 
 
