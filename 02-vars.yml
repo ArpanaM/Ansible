@@ -1,56 +1,63 @@
-- name: Play Level Variables
-  hosts: all
-  vars:
-    URL: play.example.com
-  tasks:
-    - name : Task1
-      ansible.builtin.debug:
-          msg: URL task1 - {{URL}}
-    - name: Task2
-      ansible.builtin.debug:
-              msg: URL task2 - {{URL}}
+#- name: Play Level Variables
+#  hosts: all
+#  vars:
+#    URL: play.example.com
+#  tasks:
+#    - name : Task1
+#      ansible.builtin.debug:
+#          msg: URL task1 - {{URL}}
+#    - name: Task2
+#      ansible.builtin.debug:
+#              msg: URL task2 - {{URL}}
+#
+#- name: Play for variable level files
+#  hosts: all
+#  vars_files:
+#    - sample-vars.yml
+#  tasks:
+#    - name: task1 from variable level files
+#      ansible.builtin.debug:
+#              msg: URL - {{URL}}
+#
+#- name: play for task level variables
+#  hosts: all
+#  tasks:
+#    - name: Task1
+#      ansible.builtin.debug:
+#        msg: URL - {{URL}}
+#      vars:
+#        URL: task1.example.com
+#        msg: URL - {{URL}}
+#    - name: Task2
+#      vars:
+#        URL: task2.example.com
+#      ansible.builtin.debug:
+#           msg: URL - {{URL}}
+#
+#- name: play for inventory level variables
+#  hosts: all
+#  tasks:
+#    - name: print url
+#      ansible.builtin.debug:
+#        msg: URL - {{URL}}
+#- name: Play for command Line variables
+#  hosts: all
+#  tasks:
+#    - name: Print URL
+#      ansible.builtin.debug:
+#        msg: URL - {{URL}}
+#- name: variable from facts
+#  hosts: all
+#  tasks:
+#    - name: print fact
+#      ansible.builtin.debug:
+#        msg: Hostname - {{ansible_fqdn}}
+#
+#
 
-- name: Play for variable level files
-  hosts: all
-  vars_files:
-    - sample-vars.yml
-  tasks:
-    - name: task1 from variable level files
-      ansible.builtin.debug:
-              msg: URL - {{URL}}
-
-- name: play for task level variables
+- name: variables for Register
   hosts: all
   tasks:
-    - name: Task1
+    - name: Uptime command
       ansible.builtin.debug:
-        msg: URL - {{URL}}
-      vars:
-        URL: task1.example.com
-        msg: URL - {{URL}}
-    - name: Task2
-      vars:
-        URL: task2.example.com
-      ansible.builtin.debug:
-           msg: URL - {{URL}}
-
-- name: play for inventory level variables
-  hosts: all
-  tasks:
-    - name: print url
-      ansible.builtin.debug:
-        msg: URL - {{URL}}
-- name: Play for command Line variables
-  hosts: all
-  tasks:
-    - name: Print URL
-      ansible.builtin.debug:
-        msg: URL - {{URL}}
-- name: variable from facts
-  hosts: all
-  tasks:
-    - name: print fact
-      ansible.builtin.debug:
-        msg: Hostname - {{ansible_fqdn}}
-
-
+        ansible.builtin.shell: uptime
