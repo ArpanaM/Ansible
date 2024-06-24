@@ -12,7 +12,8 @@ COMPONENT=$1  # first argument
 TEMP_ID="lt-07e05017fc2ec8348"
 TEMP_VER=5
 ZONE_ID=Z04776882HVJTCOQ8IAU3
-
+CREATE_INSTANCE()
+{
 
 aws ec2 describe-instances --filters "Name=tag:Name,Values=${COMPONENT}" | jq .Reservations[].Instances[].State.Name | sed 's/"//g' | grep -E 'running|stopped' &>/dev/null
 if [ $? -eq -0 ]; then
@@ -28,4 +29,14 @@ IPADDRESS=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=frontend"
 sed -e "s/IPADDRESS/${IPADDRESS}/" -e "s/COMPONENT/${COMPONENT}/" record.json >/tmp/record.json
 aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file:////tmp/record.json | jq
 
+}
 
+if [ "$COMPONENT" == "all" ]; then
+  for comp in frontend mongodb catalogue cart ; do
+    COMPONENT=$comp
+    CREATE_INSTANCE
+  done
+
+  else
+   CREATE_INSTANCE
+fi
