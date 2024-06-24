@@ -25,7 +25,7 @@ aws ec2 run-instances --launch-template LaunchTemplateId=${TEMP_ID},Version=${TE
 
 IPADDRESS=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=frontend" | jq .Reservations[].Instances[].PrivateIpAddress | sed 's/"//g' | grep -v null)
 # Update the DNS Record
-sed -e "s/IPADDRESS/${IPADDRESS}" -e "s/COMPONENT/${COMPONENT}/" record.json >/tmp/record.json
+sed -e "s/IPADDRESS/${IPADDRESS}/" -e "s/COMPONENT/${COMPONENT}/" record.json >/tmp/record.json
 aws route53 change-resource-record-sets --hosted-zone-id ${ZONE_ID} --change-batch file:////tmp/record.json | jq
 
 
