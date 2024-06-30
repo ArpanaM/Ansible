@@ -26,10 +26,10 @@
       name: nginx
       state: installed
 
-  - name: Download frontend code
-    ansible.builtin.get_url:
-        url: https://github.com/roboshop-devops-project/frontend/archive/main.zip
-        dest: /tmp/frontend.zip
+  - name: Download MongoDB Schema files
+    ansible.builtin.import_role:
+      name: common
+      tasks_from: download
 
   - name: unzip the frontend content
     ansible.builtin.unarchive:
