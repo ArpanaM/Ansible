@@ -26,7 +26,7 @@
 
  - name: install Mongodb
    ansible.builtin.yum:
-     src: mongodb-org
+     name: mongodb-org
      state: installed
 
  - name: Update MongoDB config file to listen on 0.0.0.0
