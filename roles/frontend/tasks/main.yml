@@ -26,38 +26,33 @@
       name: nginx
       state: installed
 
-#  - name: Download MongoDB Schema files
-#    ansible.builtin.import_role:
-#      name: common
-#      tasks_from: download
-
   - name: Download and unzip the frontend content
     ansible.builtin.unarchive:
       src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
       dest: /tmp
       remote_src: yes
 
-  - name: Remove old html web pages
-    ansible.builtin.file:
-      path: /usr/share/nginx/html
-      state: absent
-
-  - name: Copy the html files
-    ansible.builtin.copy:
-      src: /tmp/frontend-main/static/
-      dest: /usr/share/nginx/html/
-      remote_src: yes
-
-  - name: Copy roboshop reverse proxy configuration
-    ansible.builtin.copy:
-      src: roboshop.cfg
-      dest: /etc/nginx/default.d/roboshop.cfg
-  - name: Start Nginx
-
-    ansible.builtin.systemd:
-      name: nginx
-      state: restarted
-      enabled: yes
+#  - name: Remove old html web pages
+#    ansible.builtin.file:
+#      path: /usr/share/nginx/html
+#      state: absent
+#
+#  - name: Copy the html files
+#    ansible.builtin.copy:
+#      src: /tmp/frontend-main/static/
+#      dest: /usr/share/nginx/html/
+#      remote_src: yes
+#
+#  - name: Copy roboshop reverse proxy configuration
+#    ansible.builtin.copy:
+#      src: roboshop.cfg
+#      dest: /etc/nginx/default.d/roboshop.cfg
+#  - name: Start Nginx
+#
+#    ansible.builtin.systemd:
+#      name: nginx
+#      state: restarted
+#      enabled: yes
 
 
 
