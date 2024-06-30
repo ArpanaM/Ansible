@@ -26,11 +26,10 @@
       name: nginx
       state: installed
 
-  - name: Download and unzip the frontend content
-    ansible.builtin.unarchive:
-      src: https://github.com/roboshop-devops-project/frontend/archive/main.zip
-      dest: /tmp
-      remote_src: yes
+  - name: Download Frontend Scehma Files
+    ansible.builtin.import_role:
+      name: common
+      tasks_from: download
 
   - name: Remove old html web pages
     ansible.builtin.file:
@@ -52,7 +51,7 @@
     ansible.builtin.systemd:
       name: nginx
       state: restarted
-#      enabled: yes
+      enabled: yes
 
 
 
