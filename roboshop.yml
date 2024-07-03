@@ -5,11 +5,11 @@
   roles:
     - frontend
 #
-#- name: mongodb setup
-#  hosts: MONGODB
-#  become: yes
-#  roles:
-#    - mongodb
+- name: mongodb setup
+  hosts: MONGODB
+  become: yes
+  roles:
+    - mongodb
 
 - name: catalogue setup
   hosts: CATALOGUE
