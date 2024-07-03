@@ -21,20 +21,20 @@
      state: started
      enabled: yes
 
-# - name: Download MongoDB Scehma Files
-#   ansible.builtin.import_role:
-#       name: common
-#       tasks_from: download
-#
-# - name: Load catalogue schema
-#   community.mongodb.mongodb_shell:
-#     file: "/tmp/mongodb-main/catalogue.js"
-#     idempotent: yes
-#
-# - name: Load users schema
-#   community.mongodb.mongodb_shell:
-#      file: "/tmp/mongodb-main/users.js"
-#      idempotent: yes
+ - name: Download MongoDB Scehma Files
+   ansible.builtin.import_role:
+       name: common
+       tasks_from: download
+
+ - name: Load catalogue schema
+   community.mongodb.mongodb_shell:
+     file: "/tmp/mongodb-main/catalogue.js"
+     idempotent: yes
+
+ - name: Load users schema
+   community.mongodb.mongodb_shell:
+      file: "/tmp/mongodb-main/users.js"
+      idempotent: yes
 
 
 
