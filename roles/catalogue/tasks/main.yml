@@ -1,0 +1,36 @@
+# mv /home/roboshop/catalogue/systemd.service /etc/systemd/system/catalogue.service
+# systemctl daemon-reload
+# systemctl start catalogue
+# systemctl enable catalogue
+
+- name: Install nodejs Service
+  ansible.builtin.yum:
+    name:
+      - nodejs
+      - make
+      - gcc-c++
+    state: installed
+- name: Add Application User
+  ansible.builtin.user:
+    name: roboshop
+- name: Download and unzip the catalogue content
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: download
+
+- name: Remove old app content
+  ansible.builtin.file:
+    path: /home/roboshop/catalogue
+    state: absent
+
+- name: Copy App content
+  ansible.builtin.copy:
+    src: /tmp/catalogue-main/
+    dest: /home/roboshop/catalogue/
+    remote_src: yes
+  become_user: roboshop
+
+- name: Install nodejs dependencies
+  community.general.npm:
+    path: /home/roboshop/catalogue
+  become_user: roboshop
