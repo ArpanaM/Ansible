@@ -10,6 +10,7 @@
   become: yes
   roles:
     - mongodb
+
 - name: catalogue setup
   hosts: CATALOGUE
   become: yes
